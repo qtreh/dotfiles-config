@@ -1,109 +1,100 @@
-# Hyphen-insensitive completion. Case sensitive completion must be off.
-HYPHEN_INSENSITIVE="true"
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# We don't need 'oh-my-zsh' updates
-DISABLE_AUTO_UPDATE="true"
+# Path to your oh-my-zsh installation.
+  export ZSH="/home/kent/.oh-my-zsh"
 
-# Enables command auto-correction.
-ENABLE_CORRECTION="true"
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="agnoster"
 
-# Displays red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-# Optional formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="dd.mm.yyyy"
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-# Tmux plugin configuration
-ZSH_TMUX_AUTOSTART="true"
-ZSH_TMUX_AUTOSTART_ONCE="true"
-ZSH_TMUX_AUTOCONNECT="false"
-ZSH_TMUX_AUTOQUIT="true"
-ZSH_TMUX_FIXTERM="false"
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
-# Powerlevel9k configuration
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-POWERLEVEL9K_SHORTEN_DELIMITER=".."
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
 
-POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND='black'
-POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND='178'
-POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND="blue"
-POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND="015"
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='245'
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND='black'
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir dir_writable vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time)
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
 
-# Activate extended globbing
-setopt EXTENDED_GLOB
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
 
-# Include dotfiles in globs
-setopt GLOB_DOTS
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
 
-# Activate correction
-setopt CORRECT
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
 
-# Don't reduce background processes performance
-unsetopt BG_NICE
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# History configuration
-setopt APPEND_HISTORY
-setopt INC_APPEND_HISTORY
-setopt HIST_IGNORE_DUPS
-setopt HIST_FIND_NO_DUPS
-setopt HIST_REDUCE_BLANKS
-setopt EXTENDED_HISTORY
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
 
-# Completion configuration
-setopt COMPLETE_IN_WORD
-setopt ALWAYS_TO_END
-setopt PROMPT_SUBST
-unsetopt MENU_COMPLETE
-setopt AUTO_MENU
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
 
-# We don't expand '~'
-export fignore=(\~)
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git docker kubectl pip python dirhistory extract)
 
-# If in a tmux session, we disable CTRL+D
-[ ! -z "$TMUX" ] && setopt ignoreeof
+source $ZSH/oh-my-zsh.sh
 
-# WSL-only configuration
-if uname -a | grep -q '^Linux.*Microsoft'; then
-    ## connect to our VcXsrv instance
-    export DISPLAY=:0.0
-    ## we ignore windows dlls for autocompletion
-    zstyle ':completion:*:-command-:*' ignored-patterns '*.(DLL|dll)'
-    ## source our ssh-agent settings
-    [ -e "/home/keupon/.ssh/environment" ] && source "/home/keupon/.ssh/environment" >/dev/null
-    ## start ssh-agent if failed to launch on startup
-    alias ssh-agent-start='schtasks.exe /run /tn ssh-agent-bash && sleep 1 && source ~/.ssh/environment'
-    ## add all of our current keys
-    alias ssh-add-all='ssh-add ~/.ssh/id_^*.pub'
-    ## maven alias
-    alias mvn='cmd.exe /C mvn.cmd'
-fi
+# User configuration
 
-source "${HOME}/.zgen/zgen.zsh"
+# export MANPATH="/usr/local/man:$MANPATH"
 
-if ! zgen saved; then
-    zgen oh-my-zsh
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
-    # plugins
-    zgen oh-my-zsh plugins/tmux
-    zgen oh-my-zsh plugins/gitfast
-    zgen oh-my-zsh plugins/sudo
-    zgen oh-my-zsh plugins/command-not-found
-    zgen oh-my-zsh plugins/extract
-    zgen oh-my-zsh plugins/docker
-    zgen load zsh-users/zsh-syntax-highlighting
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
-    # completions
-    zgen load zsh-users/zsh-completions src
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
 
-    # theme
-    zgen load bhilburn/powerlevel9k powerlevel9k
+# ssh
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-    # save all to init script
-    zgen save
-fi
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+# While lhunath's answer pushed me in the right direction, zsh does not seem to source .profile automatically. Lot's of good info on this topic can be found on this superuser post.
+source ~/.bashrc
+[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
