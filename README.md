@@ -13,12 +13,13 @@ init.vim: for neovim
 
 
 # TODO:
-- Delete ssh-wsl/ directory
+- [DONE] Delete ssh-wsl/ directory
 - Delete init.vim
 - Delete .zshrc
-- Atom config
+- Atom config (see dotfiles repo)
 - SSH config
-- Read https://dougblack.io/words/a-good-vimrc.html
+- [DONE] Read https://dougblack.io/words/a-good-vimrc.html
+- gitconfig from dotfiles repo
 
 # Global configuration:
 .profile
@@ -27,6 +28,6 @@ init.vim: for neovim
 .bashrc
 
 .zshrc
-- Add `[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'` this loads 
+- Add `[[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'` this loads
 
 https://stackoverflow.com/questions/764600/how-can-you-export-your-bashrc-to-zshrc
