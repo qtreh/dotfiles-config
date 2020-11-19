@@ -1,5 +1,5 @@
 # dotfiles-config
-list of the config files I use either for WSL or regular linux
+list of the config files I use for ubuntu at work and personally
 
 # ZSH theme
 To enable a custom zsh theme, check this page: https://github.com/robbyrussell/oh-my-zsh/wiki/Customization#overriding-and-adding-themes
